@@ -1,0 +1,52 @@
+{
+	"config": {
+		
+	},
+	"global": {
+		"aaaa-additional-processing": false,
+		"additional-processing": false,
+		"allow-from": "*",
+		"any-to-tcp": true,
+		"client-tcp-timeout": 2,
+		"config-dir": "/etc/powerdns/",
+		"daemon": true,
+		"disable-edns": false,
+		"entropy-source": "/dev/urandom",
+		"hint-file": "/etc/powerdns/opennic.hint",
+		"local-address": "0.0.0.0",
+		"log-common-errors": true,
+		"logging-facility": 0,
+		"lua-dns-script": "/etc/powerdns/recursor.lua",
+		"max-cache-entries": 500000,
+		"max-cache-ttl": 86400,
+		"max-mthreads": 2048,
+		"max-negative-ttl": 3600,
+		"max-packetcache-entries": 500000,
+		"max-tcp-clients": 512,
+		"max-tcp-per-client": 4,
+		"network-timeout": 1500,
+		"no-shuffle": false,
+		"packetcache-servfail-ttl": 60,
+		"packetcache-ttl": 3600,
+		"query-local-address": "0.0.0.0",
+		"remotes-ringbuffer-entries": 32768,
+		"serve-rfc1918": true,
+		"single-socket": false,
+		"soa-minimum-ttl": 3600,
+		"socket-dir": "/var/run/",
+		"spoof-nearmiss-max": 20,
+		"threads": 2
+	},
+	"servers": [
+		{
+			"host": "nrw1de.fwd.hallowe.lt",
+			"local-address": [
+				"0.0.0.0",
+				"2a01:b1c7:0:1::2"
+			],
+			"query-local-address": "185.27.253.109",
+			"server-id": "nw1de.fwd.hallowe.lt",
+			"version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~nw1de.fwd.hallowe.lt (ns1.nw.de.dns.opennic.glue, ns2.nw.de.dns.opennic.glue)"
+		}
+	]
+}
