@@ -2,6 +2,8 @@
 
 // Proof of concept code!
 
+var fs = require('fs');
+
 'use strict';
 
 var realKeyMap = {
@@ -190,15 +192,15 @@ var toRealKey = function (key, value) {
                 'value': value ? 'on' : 'off'
             };
         }
+        if (value === '*') {
+            if (key === 'allow-from') {
+                value = ['0.0.0.0/0', '::/0'];
+            } else if (key === 'local-address') {
+                value = ['0.0.0.0', '::'];
+            }
+        }
         if (typeof value === 'object' && value instanceof Array) {
             value = value.join(',');
-        }
-        if (value === '*') {
-            if (map === 'allow-from') {
-                value = '0.0.0.0/0,::/0';
-            } else if (map === 'local-address') {
-                value = '0.0.0.0,::';
-            }
         }
         if (typeof value === 'string' || typeof value === 'number') {
             return {
@@ -233,7 +235,7 @@ Object.prototype.parseConfig = function () {
 };
 
 var init = function (config) {
-    var hostconfigs = {};
+    //var hostconfigs = {};
     var globalconfig = config.global.parseConfig();
     config.servers.forEach(function (server) {
         if (typeof server.host === 'undefined') {
@@ -250,10 +252,18 @@ var init = function (config) {
                 delete hostconfig[hostlocalconfig_key];
             }
         });
-        hostconfigs[hostname] = hostconfig.toConfigFile();
-        console.log(hostconfigs[hostname]);
+        fs.writeFile(hostname + '.conf', hostconfig.toConfigFile(), function (e) {
+            if(e) {
+                console.log(e);
+                return;
+            }
+            console.log('Host config for ' + hostname + ' written to file ' + hostname + '.conf');
+            console.log(';; hostname: ' + hostname + '; filename: ' + hostname + '.conf');
+        });
+        //hostconfigs[hostname] = hostconfig.toConfigFile();
+        //console.log(hostconfigs[hostname]);
     });
-    console.log(hostconfigs);
+    //console.log(hostconfigs);
 };
 
 var stdin = '';

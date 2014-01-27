@@ -3,17 +3,23 @@
 		
 	},
 	"global": {
-		"aaaa-additional-processing": false,
+		"aaaa-additional-processing": true,
 		"additional-processing": false,
 		"allow-from": "*",
 		"any-to-tcp": true,
 		"client-tcp-timeout": 2,
 		"config-dir": "/etc/powerdns/",
 		"daemon": true,
-		"disable-edns": false,
+                "dont-query": [
+                    "127.0.0.0/8",
+                    "::1/128"
+                ],
+		"enable-edns": false,
+                "enable-packetcache": true,
 		"entropy-source": "/dev/urandom",
 		"hint-file": "/etc/powerdns/opennic.hint",
 		"local-address": "0.0.0.0",
+                "local-port": 53,
 		"log-common-errors": true,
 		"logging-facility": 0,
 		"lua-dns-script": "/etc/powerdns/recursor.lua",
@@ -25,7 +31,7 @@
 		"max-tcp-clients": 512,
 		"max-tcp-per-client": 4,
 		"network-timeout": 1500,
-		"no-shuffle": false,
+		"shuffle": true,
 		"packetcache-servfail-ttl": 60,
 		"packetcache-ttl": 3600,
 		"query-local-address": "0.0.0.0",
@@ -45,8 +51,8 @@
 				"2a01:b1c7:0:1::2"
 			],
 			"query-local-address": "185.27.253.109",
-			"server-id": "nw1de.fwd.hallowe.lt",
-			"version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~nw1de.fwd.hallowe.lt (ns1.nw.de.dns.opennic.glue, ns2.nw.de.dns.opennic.glue)"
+			"server-id": "nrw1de.fwd.hallowe.lt",
+			"version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~nrw1de.fwd.hallowe.lt (ns1.nw.de.dns.opennic.glue, ns2.nw.de.dns.opennic.glue)"
 		}
 	]
 }
