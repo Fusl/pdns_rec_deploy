@@ -199,6 +199,17 @@ var toRealKey = function (key, value) {
                 value = ['0.0.0.0', '::'];
             }
         }
+	if (typeof value === 'object' && value instanceof Object && (key === 'forward-zones' || key === 'forward-zones-recurse') {
+	    var forwardzones_array = [];
+	    Object.keys(value).forEach(function (zonename) {
+		if (typeof value[zonename] === 'object' && value[zonename] instanceof Array) {
+		    forwardzones_array.push(zonename + '=' + value[zonename].join(';'));
+		} else {
+		    forwardzones_array.push(zonename + '=' + value[zonename]);
+		}
+	    });
+	    value = forwardzones_array;
+	}
         if (typeof value === 'object' && value instanceof Array) {
             value = value.join(',');
         }

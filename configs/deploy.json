@@ -1,7 +1,4 @@
 {
-	"config": {
-		
-	},
 	"global": {
 		"aaaa-additional-processing": true,
 		"additional-processing": false,
@@ -10,16 +7,34 @@
 		"client-tcp-timeout": 2,
 		"config-dir": "/etc/powerdns/",
 		"daemon": true,
-                "dont-query": [
-                    "127.0.0.0/8",
-                    "::1/128"
-                ],
+		"dont-query": [
+			"127.0.0.0/8",
+			"::1/128"
+		],
 		"enable-edns": false,
-                "enable-packetcache": true,
+		"enable-packetcache": true,
 		"entropy-source": "/dev/urandom",
+		"forward-zones-recurse": {
+			"ti": [
+				"178.254.31.11",
+				"77.67.33.81"
+			],
+			"uu": [
+				"178.254.31.11",
+				"77.67.33.81"
+			],
+			"te": [
+				"178.254.31.11",
+				"77.67.33.81"
+			],
+			"ku": [
+				"178.254.31.11",
+				"77.67.33.81"
+			]
+		},
 		"hint-file": "/etc/powerdns/opennic.hint",
 		"local-address": "0.0.0.0",
-                "local-port": 53,
+		"local-port": 53,
 		"log-common-errors": true,
 		"logging-facility": 0,
 		"lua-dns-script": "/etc/powerdns/recursor.lua",
@@ -53,6 +68,51 @@
 			"query-local-address": "185.27.253.109",
 			"server-id": "nrw1de.fwd.hallowe.lt",
 			"version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~nrw1de.fwd.hallowe.lt (ns1.nw.de.dns.opennic.glue, ns2.nw.de.dns.opennic.glue)"
+		},
+		{
+			"host": "wa1us.fwd.hallowe.lt",
+			"local-address": [
+				"23.226.230.72",
+				"2604:180:1::feca:5ec2",
+				"2604:180:1::65ef:f8c0",
+				"2604:180:1::6e84:c523",
+				"2604:180:1::8d12:1dc",
+				"2604:180:1::27a9:3f3b",
+				"2604:180:1::63d5:ba18",
+				"2604:180:1::435:e35e",
+				"2604:180:1::ec0b:6535",
+				"2604:180:1::e7d2:563e",
+				"2604:180:1::1b72:ce49",
+				"2604:180:1::8bcf:7b45",
+				"2604:180:1::36d5:16f3",
+				"2604:180:1::c56e:ab0b",
+				"2604:180:1::a7be:d83b",
+				"2604:180:1::a9ef:8168",
+				"2604:180:1::347b:b4e0"
+			],
+			"query-local-address": [
+				"23.226.230.72"
+			],
+			"query-local-address6": [
+				"2604:180:1::feca:5ec2",
+				"2604:180:1::65ef:f8c0",
+				"2604:180:1::6e84:c523",
+				"2604:180:1::8d12:1dc",
+				"2604:180:1::27a9:3f3b",
+				"2604:180:1::63d5:ba18",
+				"2604:180:1::435:e35e",
+				"2604:180:1::ec0b:6535",
+				"2604:180:1::e7d2:563e",
+				"2604:180:1::1b72:ce49",
+				"2604:180:1::8bcf:7b45",
+				"2604:180:1::36d5:16f3",
+				"2604:180:1::c56e:ab0b",
+				"2604:180:1::a7be:d83b",
+				"2604:180:1::a9ef:8168",
+				"2604:180:1::347b:b4e0"
+			],
+			"server-id": "wa1us.fwd.hallowe.lt",
+			"version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~wa1us.fwd.hallowe.lt"
 		}
 	]
 }
