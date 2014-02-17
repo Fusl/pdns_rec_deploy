@@ -200,15 +200,19 @@ var toRealKey = function (key, value) {
             }
         }
 	if (typeof value === 'object' && value instanceof Object && (key === 'forward-zones' || key === 'forward-zones-recurse')) {
-	    var forwardzones_array = [];
-	    Object.keys(value).forEach(function (zonename) {
-		if (typeof value[zonename] === 'object' && value[zonename] instanceof Array) {
-		    forwardzones_array.push(zonename + '=' + value[zonename].join(';'));
+	    var objectarray = [];
+	    Object.keys(value).forEach(function (singleobjectkey) {
+		if (typeof value[singleobjectkey] === 'object') {
+		    if (value[singleobjectkey] instanceof Array) {
+			objectarray.push(singleobjectkey + '=' + value[singleobjectkey].join(';'));
+		    } else {
+			throw new Error('An object may not contain another object in key/value pair ' + JSON.stringify({key: key, value: value}));
+		    }
 		} else {
-		    forwardzones_array.push(zonename + '=' + value[zonename]);
+		    objectarray.push(singleobjectkey + '=' + value[singleobjectkey]);
 		}
 	    });
-	    value = forwardzones_array;
+	    value = objectarray;
 	}
         if (typeof value === 'object' && value instanceof Array) {
             value = value.join(',');
