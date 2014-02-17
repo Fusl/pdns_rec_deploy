@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Pdns rec deploy by Fusl</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Pdns rec deploy</h1>
+        <h2>Create easily deployable powerdns recursor configuration files from a simple JSON configuration</h2>
+        <a href="https://github.com/Fusl/pdns_rec_deploy" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h3>
+<a name="what" class="anchor" href="#what"><span class="octicon octicon-link"></span></a>What?</h3>
+
+<p>pdns_rec_deploy is a simple PowerDNS Recursor configuration generator, which reads data from a JSON file. The generated configuration files can be used later to quickly deploy a configuration on many PowerDNS Recursors which share most of the initial configuration.</p>
+
+<h3>
+<a name="why" class="anchor" href="#why"><span class="octicon octicon-link"></span></a>Why?</h3>
+
+<p>I'm currently managing a couple of DNS recursors out there which run PowerDNS Recursor as DNS solution. But - as hard as I tried - I couldn't found a solution to simplify the configuration and the deployment of the confiuration for these servers and so I wrote it myself in Node.js.</p>
+
+<h3>
+<a name="how" class="anchor" href="#how"><span class="octicon octicon-link"></span></a>How?</h3>
+
+<p>You can easily clone this repository (<code>git clone https://github.com/Fusl/pdns_rec_deploy</code>) and change the configuration parameters to your needs. To automatically and instantly deploy the generated configuration file(s) I always used this simple bash-script:</p>
+
+<div class="highlight highlight-bash"><pre>node bin/deploy.js &lt; configs/deploy.json <span class="p">|</span> grep <span class="s1">';;'</span> <span class="p">|</span> <span class="k">while </span><span class="nb">read </span>line
+<span class="k">do               </span>
+<span class="nv">hostname</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$line</span> <span class="p">|</span> awk -F<span class="s1">'hostname: '</span> <span class="s1">'{print $2}'</span> <span class="p">|</span> awk -F<span class="s1">';'</span> <span class="s1">'{print $1}'</span><span class="k">)</span>
+<span class="nv">filename</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="nv">$line</span> <span class="p">|</span> awk -F<span class="s1">'filename: '</span> <span class="s1">'{print $2}'</span><span class="k">)</span>
+cat <span class="nv">$filename</span> <span class="p">|</span> ssh root@<span class="nv">$hostname</span> <span class="s1">'cat &gt; /etc/powerdns/recursor.conf &amp;&amp; /etc/init.d/pdns-recursor restart'</span>
+<span class="k">done</span>
+</pre></div>
+
+<p>So as you can see, you need to pipe the JSON file into the deploy.js script which then saves the configuration into different files named after the hostname given and .conf behind.</p>
+
+<h3>
+<a name="wat" class="anchor" href="#wat"><span class="octicon octicon-link"></span></a>Wat?</h3>
+
+<h4>
+<a name="the-deployjson-configuration-file" class="anchor" href="#the-deployjson-configuration-file"><span class="octicon octicon-link"></span></a>The deploy.json configuration file</h4>
+
+<p>... holds two basic objects, the "global" object and the "servers" array. </p>
+
+<h4>
+<a name="the-global-object" class="anchor" href="#the-global-object"><span class="octicon octicon-link"></span></a>The "global" object</h4>
+
+<p>... holds <code>"key": "value"</code> pairs which then will be passed to the output configuration file. All the keys have to be named after their real name in PowerDNS Recursor. The only difference is at the value: It can hold an array or an object, where a simple like <code>{"org": "127.0.0.1", "net": "127.0.0.2"}</code> will be rewritten as <code>org=127.0.0.1,net=127.0.0.2</code>. A more complex object, which holds an array in it, like <code>{"org": ["127.0.0.1", "127.0.0.2"], "net": "127.0.0.3"}</code> will be rewritten as <code>org=127.0.0.1;127.0.0.2,net=127.0.0.3</code>. A simple array like <code>["0.0.0.0", "::"]</code> will be rewritten as <code>0.0.0.0,::</code>. It's just as simple as omitting the object/array and just writing the plain text as value.</p>
+
+<h4>
+<a name="the-servers-array" class="anchor" href="#the-servers-array"><span class="octicon octicon-link"></span></a>The "servers" array</h4>
+
+<p>... holds all the server objects. The format is the same as in the "global" object, but with the difference that it overrides all the values in the "global" object. If the value is <code>null</code>, it will be removed if it exists and not being added if it doesn't.</p>
+
+<h4>
+<a name="the-onoffyesno-switch" class="anchor" href="#the-onoffyesno-switch"><span class="octicon octicon-link"></span></a>The on/off/yes/no switch</h4>
+
+<p>... can be used by defining <code>true</code> or <code>false</code> (without the "" in the examples above) in the configuration file.</p>
+
+<h3>
+<a name="wtf" class="anchor" href="#wtf"><span class="octicon octicon-link"></span></a>WTF?</h3>
+
+<p>The parser also understands quite a few aliases defined in the <a href="https://github.com/Fusl/pdns_rec_deploy/blob/master/bin/deploy.js#L9">core</a>. Some of them are completely different from the PowerDNS Recursor as they're being inverted. A normal 1:1 rewriting for example is <code>"do-aaaa-additional-processing": true</code> which whill end up as <code>"aaaa-additional-processing": true</code> and then (in the configuration file) as <code>aaaa-additional-processing=on</code>. But a <code>"no-export-etc-hosts": true</code> will end up as <code>"export-etc-hosts": false</code> and then as <code>export-etc-hosts=off</code>.</p>
+
+<h3>
+<a name="bugs" class="anchor" href="#bugs"><span class="octicon octicon-link"></span></a>Bugs?</h3>
+
+<p>If I find bugs, i'm gonna fix them. But i don't always find bugs and therefor need your help! So, if you find any type of bug (screwed up configuration file, weird behaviour, etc.), please open open a new issue ticket!</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/Fusl/pdns_rec_deploy/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/Fusl/pdns_rec_deploy/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/Fusl/pdns_rec_deploy"></a> is maintained by <a href="https://github.com/Fusl">Fusl</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
