@@ -9,7 +9,7 @@ I'm currently managing a couple of DNS recursors out there which run PowerDNS Re
 
 ### How?
 You can easily clone this repository (```git clone https://github.com/Fusl/pdns_rec_deploy```) and change the configuration parameters to your needs. To automatically and instantly deploy the generated configuration file(s) I always used this simple bash-script:
-```
+```bash
 node bin/deploy.js < configs/deploy.json | grep ';;' | while read line
 do               
 hostname=$(echo $line | awk -F'hostname: ' '{print $2}' | awk -F';' '{print $1}')
