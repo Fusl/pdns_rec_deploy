@@ -1,118 +1,207 @@
 {
-	"global": {
-		"aaaa-additional-processing": true,
-		"additional-processing": false,
-		"allow-from": "*",
-		"any-to-tcp": true,
-		"client-tcp-timeout": 2,
-		"config-dir": "/etc/powerdns/",
-		"daemon": true,
-		"dont-query": [
-			"127.0.0.0/8",
-			"::1/128"
-		],
-		"enable-edns": false,
-		"enable-packetcache": true,
-		"entropy-source": "/dev/urandom",
-		"forward-zones-recurse": {
-			"ti": [
-				"178.254.31.11",
-				"77.67.33.81"
-			],
-			"uu": [
-				"178.254.31.11",
-				"77.67.33.81"
-			],
-			"te": [
-				"178.254.31.11",
-				"77.67.33.81"
-			],
-			"ku": [
-				"178.254.31.11",
-				"77.67.33.81"
-			]
-		},
-		"hint-file": "/etc/powerdns/opennic.hint",
-		"local-address": "0.0.0.0",
-		"local-port": 53,
-		"log-common-errors": true,
-		"logging-facility": 0,
-		"lua-dns-script": "/etc/powerdns/recursor.lua",
-		"max-cache-entries": 500000,
-		"max-cache-ttl": 86400,
-		"max-mthreads": 2048,
-		"max-negative-ttl": 3600,
-		"max-packetcache-entries": 500000,
-		"max-tcp-clients": 512,
-		"max-tcp-per-client": 4,
-		"network-timeout": 1500,
-		"shuffle": true,
-		"packetcache-servfail-ttl": 60,
-		"packetcache-ttl": 3600,
-		"query-local-address": "0.0.0.0",
-		"remotes-ringbuffer-entries": 32768,
-		"serve-rfc1918": true,
-		"single-socket": false,
-		"soa-minimum-ttl": 3600,
-		"socket-dir": "/var/run/",
-		"spoof-nearmiss-max": 20,
-		"threads": 2
-	},
-	"servers": [
-		{
-			"host": "nrw1de.fwd.hallowe.lt",
-			"local-address": [
-				"0.0.0.0",
-				"2a01:b1c7:0:1::2"
-			],
-			"query-local-address": "185.27.253.109",
-			"server-id": "nrw1de.fwd.hallowe.lt",
-			"version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~nrw1de.fwd.hallowe.lt (ns1.nw.de.dns.opennic.glue, ns2.nw.de.dns.opennic.glue)"
-		},
-		{
-			"host": "wa1us.fwd.hallowe.lt",
-			"local-address": [
-				"23.226.230.72",
-				"2604:180:1::feca:5ec2",
-				"2604:180:1::65ef:f8c0",
-				"2604:180:1::6e84:c523",
-				"2604:180:1::8d12:1dc",
-				"2604:180:1::27a9:3f3b",
-				"2604:180:1::63d5:ba18",
-				"2604:180:1::435:e35e",
-				"2604:180:1::ec0b:6535",
-				"2604:180:1::e7d2:563e",
-				"2604:180:1::1b72:ce49",
-				"2604:180:1::8bcf:7b45",
-				"2604:180:1::36d5:16f3",
-				"2604:180:1::c56e:ab0b",
-				"2604:180:1::a7be:d83b",
-				"2604:180:1::a9ef:8168",
-				"2604:180:1::347b:b4e0"
-			],
-			"query-local-address": [
-				"23.226.230.72"
-			],
-			"query-local-address6": [
-				"2604:180:1::feca:5ec2",
-				"2604:180:1::65ef:f8c0",
-				"2604:180:1::6e84:c523",
-				"2604:180:1::8d12:1dc",
-				"2604:180:1::27a9:3f3b",
-				"2604:180:1::63d5:ba18",
-				"2604:180:1::435:e35e",
-				"2604:180:1::ec0b:6535",
-				"2604:180:1::e7d2:563e",
-				"2604:180:1::1b72:ce49",
-				"2604:180:1::8bcf:7b45",
-				"2604:180:1::36d5:16f3",
-				"2604:180:1::c56e:ab0b",
-				"2604:180:1::a7be:d83b",
-				"2604:180:1::a9ef:8168",
-				"2604:180:1::347b:b4e0"
-			],
-			"server-id": "wa1us.fwd.hallowe.lt",
-			"version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~wa1us.fwd.hallowe.lt"
-		}
-	]
+  "global": {
+    "aaaa-additional-processing": true,
+    "additional-processing": false,
+    "allow-from": "*",
+    "any-to-tcp": true,
+    "client-tcp-timeout": 2,
+    "config-dir": "/etc/powerdns/",
+    "daemon": true,
+    "dont-query": [
+      "127.0.0.0/8",
+      "::1/128"
+    ],
+    "enable-edns": false,
+    "enable-packetcache": true,
+    "entropy-source": "/dev/urandom",
+    "forward-zones-recurse": {
+      "ti": [
+        "178.254.31.11",
+        "77.67.33.81"
+      ],
+      "uu": [
+        "178.254.31.11",
+        "77.67.33.81"
+      ],
+      "te": [
+        "178.254.31.11",
+        "77.67.33.81"
+      ],
+      "ku": [
+        "178.254.31.11",
+        "77.67.33.81"
+      ],
+      "qc": "198.100.146.51"
+    },
+    "hint-file": "/etc/powerdns/opennic.hint",
+    "local-address": "0.0.0.0",
+    "local-port": 53,
+    "log-common-errors": true,
+    "logging-facility": 0,
+    "lua-dns-script": "/etc/powerdns/recursor.lua",
+    "max-cache-entries": 100000,
+    "max-cache-ttl": 86400,
+    "max-mthreads": 2048,
+    "max-negative-ttl": 3600,
+    "max-packetcache-entries": 100000,
+    "max-tcp-clients": 512,
+    "max-tcp-per-client": 4,
+    "network-timeout": 1500,
+    "shuffle": true,
+    "packetcache-servfail-ttl": 60,
+    "packetcache-ttl": 3600,
+    "query-local-address": "0.0.0.0",
+    "remotes-ringbuffer-entries": 32768,
+    "serve-rfc1918": true,
+    "single-socket": false,
+    "soa-minimum-ttl": 3600,
+    "socket-dir": "/var/run/",
+    "spoof-nearmiss-max": 20,
+    "threads": 2
+  },
+  "servers": [
+    {
+      "host": "nrw1de.fwd.hallowe.lt",
+      "local-address": [
+        "127.0.0.1",
+        "185.27.253.92",
+        "2a01:b1c7:0:1::2"
+      ],
+      "max-cache-entries": 1000000,
+      "max-packetcache-entries": 1000000,
+      "query-local-address": "185.27.253.109",
+      "server-id": "nrw1de.fwd.hallowe.lt",
+      "version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~nrw1de.fwd.hallowe.lt (ns3.nrw.de.dns.opennic.glue, ns4.nw.de.dns.opennic.glue)"
+    },
+    {
+      "host": "vie1at.fwd.hallowe.lt",
+      "local-address": [
+        "127.0.0.1",
+        "151.236.6.156",
+        "2a03:f80:ed15:ed15:ed15:ed15:942f:94d0",
+        "fd87:d87e:eb43:5c1f:1cd0:fdd8:d009:e665"
+      ],
+      "max-cache-entries": 200000,
+      "max-packetcache-entries": 200000,
+      "query-local-address": [
+        "151.236.6.156"
+      ],
+      "query-local-address6": [
+        "2a03:f80:ed15:ed15:ed15:ed15:942f:94d0"
+      ],
+      "server-id": "vie1at.fwd.hallowe.lt",
+      "version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~vie1at.fwd.hallowe.lt (ns1.vie.at.dns.opennic.glue, ns2.vie.at.dns.opennic.glue)"
+    },
+    {
+      "host": "dus1de.fwd.hallowe.lt",
+      "local-address": [
+        "127.0.0.1",
+        "62.141.38.230",
+        "2001:4ba0:cafe:383::1",
+        "2001:4ba0:cafe:383:15:a:bad:1dea",
+        "2001:4ba0:cafe:383:a:dead:beef:b10b",
+        "2001:4ba0:cafe:0383:0123:4567:89ab:cdef"
+      ],
+      "max-cache-entries": 1000000,
+      "max-packetcache-entries": 1000000,
+      "query-local-address": [
+        "62.141.38.230"
+      ],
+      "query-local-address6": [
+        "2001:4ba0:cafe:383::1",
+        "2001:4ba0:cafe:383:15:a:bad:1dea",
+        "2001:4ba0:cafe:383:a:dead:beef:b10b",
+        "2001:4ba0:cafe:0383:0123:4567:89ab:cdef"
+      ],
+      "server-id": "dus1de.fwd.hallowe.lt",
+      "version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~dus1de.fwd.hallowe.lt (ns1.dus.de.dns.opennic.glue, ns2.dus.de.dns.opennic.glue, ns3.dus.de.dns.opennic.glue, ns4.dus.de.dns.opennic.glue, ns5.dus.de.dns.opennic.glue)"
+    },
+    {
+      "host": "mow1ru.fwd.hallowe.lt",
+      "local-address": [
+        "127.0.0.1",
+        "213.183.57.55",
+        "2a02:150:7:213:183:57:55:0",
+        "fd87:d87e:eb43:71f5:7f34:2f90:fbe0:d7ca"
+      ],
+      "query-local-address": [
+        "213.183.57.55"
+      ],
+      "query-local-address6": [
+        "2a02:150:7:213:183:57:55:0",
+        "fd87:d87e:eb43:71f5:7f34:2f90:fbe0:d7ca"
+      ],
+      "server-id": "mow1ru.fwd.hallowe.lt",
+      "version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~mow1ru.fwd.hallowe.lt (ns1.mow.ru.dns.opennic.glue, ns4.mow.ru.dns.opennic.glue)"
+    },
+    {
+      "host": "vs1cl.fwd.hallowe.lt",
+      "local-address": [
+        "127.0.0.1",
+        "37.235.52.191",
+        "2a03:f80:56:37:235:52:191:1",
+        "fd87:d87e:eb43:abe1:aa67:73f6:86f1:d15a"
+      ],
+      "query-local-address": [
+        "37.235.52.191"
+      ],
+      "query-local-address6": [
+        "2a03:f80:56:37:235:52:191:1"
+      ],
+      "server-id": "vs1cl.fwd.hallowe.lt",
+      "version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~vs1cl.fwd.hallowe.lt (ns1.vs.cl.dns.opennic.glue, ns2.vs.cl.dns.opennic.glue)"
+    },
+    {
+      "host": "wa1us.fwd.hallowe.lt",
+      "local-address": [
+        "127.0.0.1",
+        "23.226.230.72",
+        "2604:180:1::8d12:1dc",
+        "2604:180:1::435:e35e",
+        "fd87:d87e:eb43:7b3d:c43a:b096:4f8c:b9a"
+      ],
+      "max-cache-entries": 10000,
+      "max-packetcache-entries": 10000,
+      "query-local-address": [
+        "23.226.230.72"
+      ],
+      "query-local-address6": [
+        "2604:180:1::8d12:1dc",
+        "2604:180:1::435:e35e"
+      ],
+      "server-id": "wa1us.fwd.hallowe.lt",
+      "version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~wa1us.fwd.hallowe.lt (ns1.wa.us.dns.opennic.glue, ns2.wa.us.dns.opennic.glue)"
+    },
+    {
+      "host": "sn1de.fwd.hallowe.lt",
+      "local-address": [
+        "127.0.0.1",
+        "78.47.34.12",
+        "2a01:4f8:192:2393::f023:90af",
+        "fd87:d87e:eb43:2801:d9b8:1d81:b838:58f6"
+      ],
+      "max-cache-entries": 100000,
+      "max-packetcache-entries": 100000,
+      "query-local-address": [
+        "78.47.34.12"
+      ],
+      "query-local-address6": [
+        "2a01:4f8:192:2393::f023:90af"
+      ],
+      "server-id": "sn1de.fwd.hallowe.lt",
+      "version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~sn1de.fwd.hallowe.lt (ns3.sn.de.dns.opennic.glue, ns4.sn.de.dns.opennic.glue)"
+    },
+    {
+      "export-etc-hosts": true,
+      "host": "sn1de.xfwd.hallowe.lt",
+      "local-address": [
+        "10.92.233.105"
+      ],
+      "query-local-address": [
+        "10.92.233.105"
+      ],
+      "server-id": "sn1de.xfwd.hallowe.lt",
+      "version-string": "OpenNIC Tier2 DNS powered by hallowe.lt ~sn1de.xfwd.hallowe.lt"
+    }
+  ]
 }
