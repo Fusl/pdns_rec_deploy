@@ -228,7 +228,7 @@ var toRealKey = function (key, value) {
     var mapTo = map.substr(1);
     var mapType = map.substr(0, 1);
     if (mapType === '=') {
-        return toReaKey(mapTo, value);
+        return toRealKey(mapTo, value);
     }
     if (mapType === '!') {
         return toRealKey(mapTo, !value);
